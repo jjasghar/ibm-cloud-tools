@@ -16,7 +16,7 @@ RUN apt-get install wget curl unzip nano -y
 WORKDIR "/root"
 RUN apt-get install python-softlayer -y
 
-# BlueMix CLI
+# IBMcloud CLI
 WORKDIR "/root"
 RUN curl -sL https://ibm.biz/idt-installer | bash
 RUN cd /root/
@@ -68,14 +68,14 @@ Thank you for using the IBM Cloud Docker Container. \n \
 \n \
 \n \
 You have the following tools at your disposal: \n \
-  - bx (bluemix cli) \n \
+  - helm (helm cli) \n \
+  - ibmcloud (ibmcloud cli) \n \
+  - ibmclodu cf (ibmcloud cloud foundry cli) \n \
+  - istioctl (istio cli) \n \
+  - kubectl (kubernetes cli) \n \
+  - nano (if you need to edit any text) \n \
   - slcli (softlayer cli) \n \
   - terraform (terraform with the IBM cloud provider) \n \
-  - kubectl (kubernetes cli) \n \
-  - istioctl (istio cli) \n \
-  - helm (helm cli) \n \
-  - nano (if you need to edit any text) \n \
-\n \
 \n \
 \n \
 Hopefully you bound mounted your credentials from the README \n \
