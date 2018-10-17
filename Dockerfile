@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM debian:buster-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV HELM_VERSION=2.11.0
@@ -68,6 +68,7 @@ Thank you for using the IBM Cloud Docker Container. \n \
 \n \
 \n \
 You have the following tools at your disposal: \n \
+  - git (git cli) \n \
   - helm (helm cli) \n \
   - ibmcloud (ibmcloud cli) \n \
   - ibmclodu cf (ibmcloud cloud foundry cli) \n \
