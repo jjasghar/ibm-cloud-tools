@@ -10,35 +10,35 @@ the IBM :cloud: in one spot.
 Here is how to build it:
 
 ```shell
-git clone GITREPO
-cd ibmcloud-docker
+git clone https://github.com/jjasghar/ibm-cloud-tools/
+cd ibm-cloud-tools
 docker build .
 ```
 
 ## Running the container
 
 ```shell
-docker pull IBM/ibmcloud-tools # TBD
+docker pull jjasghar/ibm-cloud-tools
 ```
 
 ### Using Softlayer
 
 ```shell
-docker run -it -v ~/.softlayer:/root/.softlayer IBM/ibmcloud-tools # TBD
+docker run -it -v ~/.softlayer:/root/.softlayer jjasghar/ibm-cloud-tools
 ```
 
 ### Using BlueMix
 
 ```shell
-docker run -it IBM/ibmcloud-tools # TBD
-IBM☁️  # bx login
+docker run -it jjasghar/ibm-cloud-tools
+IBM☁️  # ibmcloud login
 ```
 
 ### Using Terraform
 
 ```shell
 cd terraform_plans # Where every you have your .tf files
-docker run -it -v $PWD:/root/terraform_plans IBM/ibmcloud-tools # TBD
+docker run -it -v $PWD:/root/terraform_plans jjasghar/ibm-cloud-tools
 cd terraform_plans
 terraform init
 terraform apply
@@ -56,7 +56,7 @@ If you would like to see the detailed LICENCE click [here](./LICENCE).
 - Author: JJ Asghar <jja@ibm.com>
 
 ```text
-Copyright:: IBM, Inc
+Copyright:: 2018- IBM, Inc
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
