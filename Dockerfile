@@ -1,20 +1,12 @@
 FROM debian:buster-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV HELM_VERSION=2.11.0
 ENV ISTIO_VERSION=1.0.2
 ENV TERRAFORM_VERSION=0.11.8
 ENV TERRAFORM_IBMCLOUD_VERSION=0.12.0
 
-# Update the OS
-RUN apt-get update
-
-# Install deps that are needed
-RUN apt-get install wget curl unzip nano -y
-
-# Softlayer CLI
-WORKDIR "/root"
-RUN apt-get install python-softlayer -y
+# Update the OS & Install pkgs that are needed
+RUN apt-get update && apt-get install wget curl unzip nano python-softlayer -y
 
 # IBMcloud CLI
 WORKDIR "/root"
@@ -24,33 +16,26 @@ RUN mkdir /root/bin
 
 # Terraform
 WORKDIR "/root"
-RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-RUN unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-RUN chmod +x terraform
-RUN mv terraform /root/bin
-RUN rm -rf terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
+        unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
+        chmod +x terraform && \
+        mv terraform /root/bin && \
+        rm -rf terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 
 # Terraform IBM Provider
 RUN echo "providers { \n \
 ibm = "/root/terraform-provider-ibm_v${TERRAFORM_IBMCLOUD_VERSION}" \n \
 }" > /root/.terraformrc
-RUN wget https://github.com/IBM-Cloud/terraform-provider-ibm/releases/download/v${TERRAFORM_IBMCLOUD_VERSION}/linux_amd64.zip
-RUN unzip linux_amd64.zip
-RUN chmod +x terraform-provider-ibm_*
-RUN rm -rf linux_amd64.zip
+RUN wget https://github.com/IBM-Cloud/terraform-provider-ibm/releases/download/v${TERRAFORM_IBMCLOUD_VERSION}/linux_amd64.zip && \
+        unzip linux_amd64.zip && \
+        chmod +x terraform-provider-ibm_* && \
+        rm -rf linux_amd64.zip
 
 # Istio
 WORKDIR "/root"
-RUN wget https://github.com/istio/istio/releases/download/${ISTIO_VERSION}/istio-${ISTIO_VERSION}-linux.tar.gz
-RUN tar -xvzf istio-${ISTIO_VERSION}-linux.tar.gz
-RUN rm -rf istio-${ISTIO_VERSION}-linux.tar.gz
-
-# Helm
-WORKDIR "/root"
-RUN wget https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz
-RUN tar -xvzf helm-v${HELM_VERSION}-linux-amd64.tar.gz
-RUN mv linux-amd64 helm-${HELM_VERSION}
-RUN rm -rf helm-v${HELM_VERSION}-linux-amd64.tar.gz
+RUN wget https://github.com/istio/istio/releases/download/${ISTIO_VERSION}/istio-${ISTIO_VERSION}-linux.tar.gz && \
+        tar -xvzf istio-${ISTIO_VERSION}-linux.tar.gz && \
+        rm -rf istio-${ISTIO_VERSION}-linux.tar.gz
 
 # Cleanup
 WORKDIR "/root"
