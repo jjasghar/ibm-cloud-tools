@@ -19,6 +19,7 @@ docker build .
 
 ```shell
 docker run -it jjasghar/ibm-cloud-tools
+
 ```
 
 ### Using Softlayer
