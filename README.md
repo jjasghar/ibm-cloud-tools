@@ -1,5 +1,7 @@
 # IBM cloud Docker container
 
+[![Build Status](https://travis-ci.org/jjasghar/ibm-cloud-tools.svg?branch=master)](https://travis-ci.org/jjasghar/ibm-cloud-tools)
+
 ## Scope
 
 This is so you can have all of the tooling you need to start using
