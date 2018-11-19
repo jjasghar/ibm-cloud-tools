@@ -47,6 +47,16 @@ terraform init
 terraform apply
 ```
 
+### Using wskdeploy
+
+```shell
+cd wskdeploy_manifests # Where you have you wskdeploy manifest
+docker run -it -v $PWD:/root/wskdeploy_manifests jjasghar/ibm-cloud-tools
+IBM☁️  # ibmcloud login
+IBM☁️  # ibmcloud wsk api list # Generate the .wskprops file
+IBM☁️  # wskdeploy
+```
+
 ## Questions?
 
 Come join us on [Freenode](http://webchat.freenode.net/?channels=ibmcloud) if you have

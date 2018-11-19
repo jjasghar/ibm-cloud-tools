@@ -1,10 +1,11 @@
 FROM debian:buster-slim
 
-ENV IBM_CLOUD_TOOLS=1.1.0
+ENV IBM_CLOUD_TOOLS=1.2.0
 ENV DEBIAN_FRONTEND=noninteractive
 ENV ISTIO_VERSION=1.0.2
 ENV TERRAFORM_VERSION=0.11.8
 ENV TERRAFORM_IBMCLOUD_VERSION=0.12.0
+ENV WSKDEPLOY_VERSION=0.9.9
 
 # Update the OS & Install pkgs that are needed
 RUN apt-get update && apt-get install wget curl unzip nano python-softlayer -y
@@ -38,6 +39,14 @@ RUN wget https://github.com/istio/istio/releases/download/${ISTIO_VERSION}/istio
         tar -xvzf istio-${ISTIO_VERSION}-linux.tar.gz && \
         rm -rf istio-${ISTIO_VERSION}-linux.tar.gz
 
+# wskdeploy
+WORKDIR "/root"
+RUN wget https://github.com/apache/incubator-openwhisk-wskdeploy/releases/download/0.9.9/openwhisk_wskdeploy-${WSKDEPLOY_VERSION}-linux-amd64.tgz && \
+        tar -xvzf openwhisk_wskdeploy-${WSKDEPLOY_VERSION}-linux-amd64.tgz && \
+        chmod +x wskdeploy && \
+        mv wskdeploy /root/bin && \
+        rm -rf openwhisk_wskdeploy-${WSKDEPLOY_VERSION}-linux-amd64.tgz
+
 # Cleanup
 WORKDIR "/root"
 RUN  apt-get clean && \
@@ -57,12 +66,13 @@ You have the following tools at your disposal: \n \
   - git (git cli) \n \
   - helm (helm cli) \n \
   - ibmcloud (ibmcloud cli) \n \
-  - ibmclodu cf (ibmcloud cloud foundry cli) \n \
+  - ibmcloud cf (ibmcloud cloud foundry cli) \n \
   - istioctl (istio cli) \n \
   - kubectl (kubernetes cli) \n \
   - nano (if you need to edit any text) \n \
   - slcli (softlayer cli) \n \
   - terraform (terraform with the IBM cloud provider) \n \
+  - wskdeploy (openwhisk deployment tool) \n \
 \n \
 \n \
 Hopefully you bound mounted your credentials from the README \n \
